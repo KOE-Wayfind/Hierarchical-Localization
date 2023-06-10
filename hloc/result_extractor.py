@@ -13,7 +13,6 @@ from .utils.io import read_image
 def extract_loc_from_log(image_dir, query_name, loc, reconstruction=None,
                            db_image_dir=None, top_k_db=2, dpi=75):
 
-
     result = []
 
     q_image = read_image(image_dir / query_name)
@@ -64,20 +63,8 @@ def extract_loc_from_log(image_dir, query_name, loc, reconstruction=None,
             kp_db = loc['keypoints_db'][loc['indices_db'] == db_idx]
             inliers_db = inliers[loc['indices_db'] == db_idx]
 
-        db_image = read_image((db_image_dir or image_dir) / db_name)
-        color = cm_RdGn(inliers_db).tolist()
-        text = f'inliers: {sum(inliers_db)}/{len(inliers_db)}'
+        print(f'inliers: {sum(inliers_db)}/{len(inliers_db)}')
 
-        print("db_image", db_image)
-        print("db_name", db_name)
+        result.insert(db_name)
 
-        result.add(db_name)
-
-
-        # plot_images([q_image, db_image], dpi=dpi)
-        # plot_matches(kp_q, kp_db, color, a=0.1)
-        # add_text(0, text)
-        # opts = dict(pos=(0.01, 0.01), fs=5, lcolor=None, va='bottom')
-        # add_text(0, query_name, **opts)
-        # add_text(1, db_name, **opts)
     return result
