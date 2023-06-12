@@ -65,6 +65,6 @@ def extract_loc_from_log(image_dir, query_name, loc, reconstruction=None,
 
         print(f'inliers: {sum(inliers_db)}/{len(inliers_db)}')
 
-        result.insert(db_name)
+        result.append(db_name)
 
     return result
